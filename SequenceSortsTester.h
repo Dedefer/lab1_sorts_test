@@ -80,39 +80,39 @@ void SequenceSortsTester::generateLogForOneSort(std::ostream& outputStream, std:
         outputStream << "{size}\t{time}\n";
         std::unique_ptr<Sequence<int>> sortedPtr;
         for (auto size = 0; size <= max; size += step) {
-            outputStream << size << '\n';
+            outputStream << size << '\t';
             std::unique_ptr<Sequence<int>> seqPtr{generateRandomSequence<SequenceType>(size)};
 
             auto time1 = std::clock();
             sortedPtr.reset(SequenceSorts<int>::shellSort(seqPtr.get(), exampleFunctionsForSort::cmp, exampleFunctionsForSort::stepFunc));
             auto time2 = std::clock();
-            outputStream << computeInterval(time1, time2) << '\t';
+            outputStream << computeInterval(time1, time2) << '\n';
             sortedPtr.reset(nullptr);
         }
     } else if (sort == "shaker") {
         outputStream << "{size}\t{time}\n";
         std::unique_ptr<Sequence<int>> sortedPtr;
         for (auto size = 0; size <= max; size += step) {
-            outputStream << size << '\n';
+            outputStream << size << '\t';
             std::unique_ptr<Sequence<int>> seqPtr{generateRandomSequence<SequenceType>(size)};
 
             auto time1 = std::clock();
             sortedPtr.reset(SequenceSorts<int>::shakerSort(seqPtr.get(), exampleFunctionsForSort::cmp));
             auto time2 = std::clock();
-            outputStream << computeInterval(time1, time2) << '\t';
+            outputStream << computeInterval(time1, time2) << '\n';
             sortedPtr.reset(nullptr);
         }
     } else if (sort == "counting") {
         outputStream << "{size}\t{time}\n";
         std::unique_ptr<Sequence<int>> sortedPtr;
         for (auto size = 0; size <= max; size += step) {
-            outputStream << size << '\n';
+            outputStream << size << '\t';
             std::unique_ptr<Sequence<int>> seqPtr{generateRandomSequence<SequenceType>(size)};
 
             auto time1 = std::clock();
             sortedPtr.reset(SequenceSorts<int>::countingSort(seqPtr.get()));
             auto time2 = std::clock();
-            outputStream << computeInterval(time1, time2) << '\t';
+            outputStream << computeInterval(time1, time2) << '\n';
             sortedPtr.reset(nullptr);
         }
     } else {throw std::logic_error("wrong sort type");}
